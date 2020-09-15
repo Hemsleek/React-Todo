@@ -1,0 +1,67 @@
+.App{
+    display:grid;
+    grid-template-columns: 20% 1fr;
+    padding-top:1rem;
+    background:#F5F5F5  ;
+
+    .TodoWrapper{
+        display:flex;
+        flex-direction:column;
+        padding: 0 0 1rem 1rem;
+
+        h3{
+            margin: 0;
+        }
+
+
+        .SearchBox{
+            width: 85%;
+            display: flex;
+            align-items: center;
+            border-radius: 6px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+            margin: 1.2rem 0;
+            padding:.4rem;
+            background:white ;
+          
+        
+            input{
+                flex-grow: 1;
+                height: 100%;  
+                border: none;
+                font-size: .9rem;
+                padding: 0 .3rem;
+                background: white;
+            
+                
+              }
+              input:focus{
+                outline: none;
+              }
+              img{
+                width: 14px;
+                height: 14px;
+              }
+        
+        
+        }
+
+        .Todos{
+          border-bottom: 1px solid gray;
+          padding: .2rem 0;
+        }
+
+      }
+    
+      .MainContent{
+        
+        .AddTodo{
+          display: flex;
+          flex-direction: column;
+        }
+      }
+  }
+                
+
+
+
