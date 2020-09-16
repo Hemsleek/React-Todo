@@ -24,7 +24,7 @@ defaultTodos[generateId()] = {
 
     created:Date.now()
 }
-const Todos=({list}) => {
+const Todos=({list,screenhandler}) => {
     
     return (  
         <div className="Todos">
@@ -33,7 +33,7 @@ const Todos=({list}) => {
 
         const todo = list[todoId];
         return(
-            <div className="Todo" key={todoId}>
+            <div className="Todo" onClick={() => screenhandler(todo.title , todo.content)} key={todoId}>
                 <p>
                     {todo.title}
                 </p>
@@ -62,14 +62,14 @@ const SearchBox =() =>(
 )
 
 
-const TodoWrapper = ({todo}) =>(
+const TodoWrapper = ({todo,screenHandle}) =>(
     <div className="TodoWrapper">
 
         <h3>
             CV Notes
         </h3>
         <SearchBox />
-        <Todos  list ={todo} />        
+        <Todos  list ={todo} screenhandler={screenHandle} />        
     </div>
 )
 
@@ -78,7 +78,7 @@ const AddTodo = ({set ,todos}) =>{
 
     const handleSubmit =(ev) =>{
         ev.preventDefault()
-        
+
         const [title , content]=ev.target;
 
             const newNote ={};
@@ -92,6 +92,8 @@ const AddTodo = ({set ,todos}) =>{
             ...todos,
             ...newNote
         })
+        title.value="";
+        content.value="";
     
     }
     
@@ -119,30 +121,48 @@ const AddTodo = ({set ,todos}) =>{
 )
 
 }
-const MainContent =({set ,todos}) =>(
+const MainContent =({set ,todos,screen}) =>{
     
+    
+
+   
+    return(
     <div  className="MainContent">
         <AddTodo  set={set} todos={todos} />
         <div className="Screen">
+        
             <h3 className="Title">
-               
-                How to withdraw Aishat Money with her been unaware
+               {screen.title}
+                {/* How to withdraw Aishat Money with her been unaware */}
             </h3>
             <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione id explicabo distinctio quaerat non? Necessitatibus enim vel, ducimus perspiciatis debitis provident alias, aperiam aliquam placeat cumque tempora maxime dignissimos ipsa.
+                {screen.content}
+            {/* Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione id explicabo distinctio quaerat non? Necessitatibus enim vel, ducimus perspiciatis debitis provident alias, aperiam aliquam placeat cumque tempora maxime dignissimos ipsa. */}
             </p>
         </div>
     </div>
 )
+    }
 
 export default() => {
 
     const [todos , setTodos] = useState(defaultTodos); 
+    const [screen ,setScreen] = useState({title:'',content:''});
+
+    const handleScreen =(title ,content) => {
+        setScreen(
+         {
+             ...screen,
+             title,
+             content
+         }
+        )
+    }
 
     return(     
         <div  className="App">
-            <TodoWrapper todo={todos}/>
-            <MainContent set={setTodos} todos={todos}/>
+            <TodoWrapper todo={todos} screenHandle={handleScreen}/>
+            <MainContent set={setTodos} todos={todos} screen={screen} />
         </div>
     )
     
