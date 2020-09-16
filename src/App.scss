@@ -1,13 +1,18 @@
+$white:#fff;
+$shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+
 .App{
     display:grid;
-    grid-template-columns: 20% 1fr;
-    padding-top:1rem;
-    background:#F5F5F5  ;
+    grid-template-columns: 25% 1fr;
+    padding:0 .5rem ;
+    background:#F5F5F5;
+    
 
     .TodoWrapper{
         display:flex;
         flex-direction:column;
-        padding: 0 0 1rem 1rem;
+        padding: 1rem 0 1rem 1rem;
+        border-right: 1px solid #dfdbdb ;
 
         h3{
             margin: 0;
@@ -19,10 +24,10 @@
             display: flex;
             align-items: center;
             border-radius: 6px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: $shadow;
             margin: 1.2rem 0;
             padding:.4rem;
-            background:white ;
+            background:$white ;
           
         
             input{
@@ -47,17 +52,89 @@
         }
 
         .Todos{
-          border-bottom: 1px solid gray;
+          border-bottom: 1px solid #dfdbdb;
           padding: .2rem 0;
+
+          
         }
+
 
       }
     
-      .MainContent{
-        
+    .MainContent{
+       display: flex;
+       flex-direction: column;
+       height: 100vh;
+       padding:1rem 2rem ;
+      //  margin-bottom: 10rem;
+
+
         .AddTodo{
           display: flex;
           flex-direction: column;
+          width: 80%;
+          background: $white; 
+          border-radius:6px;
+          box-shadow: $shadow;  
+          height: 30%;
+    
+          input{
+            background:$white;
+            padding: 1rem .6rem;
+            font-size: 1.2rem;
+            border: none;
+            cursor: crosshair;
+          }
+          textarea{
+            flex-grow: 1;
+            resize: none;
+            @extend input
+          }
+         
+          textarea:focus,input:focus{
+            outline: none;
+          }
+          .DesignSubmit{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .6rem ;
+
+            .Colors{
+              display: flex;
+              align-items: center;
+
+              img+img{
+                margin-left: .4rem;
+              }
+              img[alt ="tick"]{
+                box-shadow: $shadow;
+                background: #FAFAFA;
+              }
+            }
+
+            img{
+              height: 18px;
+              width: 18px;
+            }
+          }
+
+        }
+        .Screen{
+          flex-grow: 1;
+          background-color: $white;
+          box-shadow: $shadow;
+          padding: 1rem 1.2rem;
+          width: 80%;
+          margin-top: 1rem;
+          border: 6px;
+
+          .Title{
+            text-align: center;
+          }
+          p{
+            font-weight: lighter;
+          }
         }
       }
   }
