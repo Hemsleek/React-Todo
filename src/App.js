@@ -55,9 +55,26 @@ const Todos=({list,screenhandler}) => {
 
 // Todos
 const SearchBox =() =>(
+
     <div className="SearchBox">
         <img src="/vectors/search.svg" alt="search-icon"/>
         <input type="text" placeholder="Search" />
+        <div className="SuggestionBox">
+            <a href="/" className="option">
+                How to read jnnfdnfndf
+            </a>
+
+            <a href="/" className="option">
+                jamal jamal jamal
+            </a>
+            <a href="/" className="option">
+                jamal jamal jamal
+            </a>
+            <a href="/" className="option">
+                jamal jamal jamal
+            </a>
+           
+        </div>
     </div>
 )
 
@@ -133,11 +150,9 @@ const MainContent =({set ,todos,screen}) =>{
         
             <h3 className="Title">
                {screen.title}
-                {/* How to withdraw Aishat Money with her been unaware */}
             </h3>
             <p>
                 {screen.content}
-            {/* Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione id explicabo distinctio quaerat non? Necessitatibus enim vel, ducimus perspiciatis debitis provident alias, aperiam aliquam placeat cumque tempora maxime dignissimos ipsa. */}
             </p>
         </div>
     </div>
