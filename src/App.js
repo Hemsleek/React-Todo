@@ -63,24 +63,7 @@ const SearchBox = ({ onInput }) => {
         <div className="SearchBox">
             <img src="/vectors/search.svg" alt="search-icon" />
             <input type="text" placeholder="Search" onChange={onInput} />
-            <div className="SuggestionBox">
-
-                {/* {handlefilter()} */}
-
-                {/* <a href="/" className="option">
-                How to read jnnfdnfndf dgy,ah
-            </a>
-
-            <a href="/" className="option">
-                jamal jamal jamal
-            </a>
-            <a href="/" className="option">
-                jamal jamal jamal
-            </a>
-            <a href="/" className="option">
-                jamal jamal jamal
-            </a> */}
-            </div>
+            
         </div>
     )
 }
