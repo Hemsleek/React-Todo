@@ -1,12 +1,12 @@
-import React , {useState}  from 'react'
+import React, { useState } from 'react'
 
 import './App.scss'
 
 
-const CreatedAT =(stamp) =>{
+const CreatedAT = (stamp) => {
     // const day =['Sun' , 'Mon' , 'Tue' , 'Wed' , 'Thu' ,'Fri' , 'Sat'];
 
-    const month = ['Jan', 'Feb', 'March' , 'April' ,'May' , 'June' , 'July' , 'Aug' , 'Sep' ,'Nov' , 'Dec'];
+    const month = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sep', 'Nov', 'Dec'];
 
     const now = new Date(stamp);
 
@@ -15,53 +15,60 @@ const CreatedAT =(stamp) =>{
 
 const generateId = (length = 4) => Math.random().toString(36).substring(2, 2 + length);
 
-const defaultTodos ={}
+const defaultTodos = {}
 defaultTodos[generateId()] = {
 
-     title:"How to withdraw Aishat Money with her been unaware",
+    title: "How to withdraw Aishat Money with her been unaware",
 
     content: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione id explicabo distinctio quaerat non? Necessitatibus enim vel, ducimus perspiciatis debitis provident alias, aperiam aliquam placeat cumque tempora maxime dignissimos ipsa.",
 
-    created:Date.now()
+    created: Date.now()
 }
-const Todos=({list,screenhandler}) => {
-    
-    return (  
+const Todos = ({ list, screenhandler }) => {
+
+    return (
         <div className="Todos">
 
-    {Object.keys(list).map(todoId => {
+            {Object.keys(list).map(todoId => {
 
-        const todo = list[todoId];
-        return(
-            <div className="Todo" onClick={() => screenhandler(todo.title , todo.content)} key={todoId}>
-                <p>
-                    {todo.title}
-                </p>
+                const todo = list[todoId];
+                return (
+                    <div className="Todo" onClick={() => screenhandler(todo.title, todo.content)} key={todoId}>
+                        <p>
+                            {todo.title}
+                        </p>
 
-                <span className="Details">
-                    {CreatedAT(todo.created)}
-                </span>
+                        <span className="Details">
+                            {CreatedAT(todo.created)}
+                        </span>
 
-            </div>
-        )
-        
-        }
-        
-    )}
-                    
-   </div>
+                    </div>
+                )
+
+            }
+
+            )}
+
+        </div>
     )
 }
 
 // Todos
-const SearchBox =() =>(
+const SearchBox = ({ onInput }) => {
+    // Object.keys(todos).filter((item) => todos[item].title.startsWith(ev.target.value)?todos[item].title :false ).map((item,i) => <a href="/" className="option" key={i}>{item}</a>)
 
-    <div className="SearchBox">
-        <img src="/vectors/search.svg" alt="search-icon"/>
-        <input type="text" placeholder="Search" />
-        <div className="SuggestionBox">
-            <a href="/" className="option">
-                How to read jnnfdnfndf
+
+    return (
+
+        <div className="SearchBox">
+            <img src="/vectors/search.svg" alt="search-icon" />
+            <input type="text" placeholder="Search" onChange={onInput} />
+            <div className="SuggestionBox">
+
+                {/* {handlefilter()} */}
+
+                {/* <a href="/" className="option">
+                How to read jnnfdnfndf dgy,ah
             </a>
 
             <a href="/" className="option">
@@ -72,113 +79,136 @@ const SearchBox =() =>(
             </a>
             <a href="/" className="option">
                 jamal jamal jamal
-            </a>
-           
+            </a> */}
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 
-const TodoWrapper = ({todo,screenHandle}) =>(
-    <div className="TodoWrapper">
+const TodoWrapper = ({ todo, screenHandle }) => {
+    const [filter, setFilter] = useState('')
 
-        <h3>
-            CV Notes
-        </h3>
-        <SearchBox />
-        <Todos  list ={todo} screenhandler={screenHandle} />        
-    </div>
-)
+    const handleFilter = (ev) => {
+        setFilter(ev.target.value)
+    }
+
+    const filteredTodo = (todo) => {
+
+        const filtered ={}
+        Object.keys(todo).forEach(id => {
+            const note =todo[id]
+            const regex =new RegExp(filter,'ig') ;
+            if(regex.test(note.title) || (regex.test(note.content))){
+
+                filtered[id]=note
+            }
+        })
+        console.log(todo)
+
+        return filtered;
+
+    }
+    return (
+        <div className="TodoWrapper">
+            <h3>
+                CV Notes
+            </h3>
+            <SearchBox onInput={handleFilter} />
+            <Todos list={filter ? filteredTodo(todo) : todo} screenhandler={screenHandle} />
+        </div>
+    )
+}
 
 // MAin-content
-const AddTodo = ({set ,todos}) =>{
+const AddTodo = ({ set, todos }) => {
 
-    const handleSubmit =(ev) =>{
+    const handleSubmit = (ev) => {
         ev.preventDefault()
 
-        const [title , content]=ev.target;
+        const [title, content] = ev.target;
 
-            const newNote ={};
+        const newNote = {};
 
-            newNote[generateId()] = {
-                title:title.value,
-                content:content.value,
-                created:Date.now()
-        }       
+        newNote[generateId()] = {
+            title: title.value,
+            content: content.value,
+            created: Date.now()
+        }
         set({
             ...todos,
             ...newNote
         })
-        title.value="";
-        content.value="";
-    
+        title.value = "";
+        content.value = "";
+
     }
-    
-    return(
-        
+
+    return (
+
         <div className="AddTodo">
             <form id="my-form" onSubmit={handleSubmit}>
 
-                <input type="text" placeholder="Title" name="title" />
-                <textarea placeholder="Type your note" name="content"></textarea>
+                <input type="text" placeholder="Title" name="title" required/>
+                <textarea placeholder="Type your note" name="content" required></textarea>
             </form>
 
-        <div className="DesignSubmit">
+            <div className="DesignSubmit">
 
-            <div className="Colors">
-                <img src="/vectors/teal.svg" alt="teal" />
-                <img src="/vectors/purple.svg" alt="yellow" />
-                <img src="/vectors/yellow.svg" alt="yellow" />
+                <div className="Colors">
+                    <img src="/vectors/teal.svg" alt="teal" />
+                    <img src="/vectors/purple.svg" alt="yellow" />
+                    <img src="/vectors/yellow.svg" alt="yellow" />
+                </div>
+                <button type="submit" form="my-form">
+                    <img src="/vectors/tick.svg" alt="tick" />
+                </button>
             </div>
-            <button type="submit" form="my-form">
-            <img src="/vectors/tick.svg" alt="tick" />
-            </button>
         </div>
-    </div>
-)
+    )
 
 }
-const MainContent =({set ,todos,screen}) =>{
-    
-    
+const MainContent = ({ set, todos, screen }) => {
 
-   
-    return(
-    <div  className="MainContent">
-        <AddTodo  set={set} todos={todos} />
-        <div className="Screen">
-        
-            <h3 className="Title">
-               {screen.title}
-            </h3>
-            <p>
-                {screen.content}
-            </p>
+
+
+
+    return (
+        <div className="MainContent">
+            <AddTodo set={set} todos={todos} />
+            <div className="Screen">
+
+                <h3 className="Title">
+                    {screen.title}
+                </h3>
+                <p>
+                    {screen.content}
+                </p>
+            </div>
         </div>
-    </div>
-)
-    }
+    )
+}
 
-export default() => {
+export default () => {
 
-    const [todos , setTodos] = useState(defaultTodos); 
-    const [screen ,setScreen] = useState({title:'',content:''});
+    const [todos, setTodos] = useState(defaultTodos);
+    const [screen, setScreen] = useState({ title: '', content: '' });
 
-    const handleScreen =(title ,content) => {
+    const handleScreen = (title, content) => {
         setScreen(
-         {
-             ...screen,
-             title,
-             content
-         }
+            {
+                ...screen,
+                title,
+                content
+            }
         )
     }
 
-    return(     
-        <div  className="App">
-            <TodoWrapper todo={todos} screenHandle={handleScreen}/>
+    return (
+        <div className="App">
+            <TodoWrapper todo={todos} screenHandle={handleScreen} />
             <MainContent set={setTodos} todos={todos} screen={screen} />
         </div>
     )
-    
+
 }
