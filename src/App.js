@@ -22,7 +22,9 @@ defaultTodos[generateId()] = {
 
     content: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione id explicabo distinctio quaerat non? Necessitatibus enim vel, ducimus perspiciatis debitis provident alias, aperiam aliquam placeat cumque tempora maxime dignissimos ipsa.",
 
-    created: Date.now()
+    created: Date.now(),
+    color:"white"
+
 }
 const Todos = ({ list, screenhandler }) => {
 
@@ -33,7 +35,7 @@ const Todos = ({ list, screenhandler }) => {
 
                 const todo = list[todoId];
                 return (
-                    <div className="Todo" onClick={() => screenhandler(todo.title, todo.content)} key={todoId}>
+                    <div className="Todo" onClick={() => screenhandler(todo.title, todo.content , todo.color)} key={todoId}>
                         <p>
                             {todo.title}
                         </p>
@@ -105,8 +107,18 @@ const TodoWrapper = ({ todo, screenHandle }) => {
 
 // MAin-content
 const AddTodo = ({ set, todos }) => {
+    const[color , setColor] = useState('white')
 
+    const handleColor = (ev) => {
+
+        Array.from(ev.target.parentNode.childNodes).map(element => element.classList.remove('active'))
+
+        ev.target.classList.add('active')
+        
+        setColor(ev.target.getAttribute("name"))
+    }
     const handleSubmit = (ev) => {
+
         ev.preventDefault()
 
         const [title, content] = ev.target;
@@ -116,14 +128,18 @@ const AddTodo = ({ set, todos }) => {
         newNote[generateId()] = {
             title: title.value,
             content: content.value,
-            created: Date.now()
+            created: Date.now(),
+            color
         }
         set({
             ...todos,
             ...newNote
         })
+
         title.value = "";
         content.value = "";
+        
+    
 
     }
 
@@ -133,15 +149,24 @@ const AddTodo = ({ set, todos }) => {
             <form id="my-form" onSubmit={handleSubmit}>
 
                 <input type="text" placeholder="Title" name="title" required/>
-                <textarea placeholder="Type your note" name="content" required></textarea>
+                <textarea placeholder="Type your note" name="content" required />
             </form>
 
             <div className="DesignSubmit">
 
                 <div className="Colors">
-                    <img src="/vectors/teal.svg" alt="teal" />
-                    <img src="/vectors/purple.svg" alt="yellow" />
-                    <img src="/vectors/yellow.svg" alt="yellow" />
+                    <span className="active" style={{background:"white"}}name="white" onClick={handleColor} >
+                        
+                    </span>
+                   
+                    <span  style={{background:"#42EADDFF"}} name="#42EADDFF" onClick={handleColor} >
+                    </span>
+
+                    <span  style={{background:"#ED2B33FF"}} name="#ED2B33FF" onClick={handleColor} >
+                    </span>
+
+                    <span style={{background:"#FEE715FF"}} name="#FEE715FF" onClick={handleColor} >
+                    </span>
                 </div>
                 <button type="submit" form="my-form">
                     <img src="/vectors/tick.svg" alt="tick" />
@@ -159,7 +184,7 @@ const MainContent = ({ set, todos, screen }) => {
     return (
         <div className="MainContent">
             <AddTodo set={set} todos={todos} />
-            <div className="Screen">
+            <div className="Screen" style={{background : screen.color}}>
 
                 <h3 className="Title">
                     {screen.title}
@@ -175,14 +200,15 @@ const MainContent = ({ set, todos, screen }) => {
 export default () => {
 
     const [todos, setTodos] = useState(defaultTodos);
-    const [screen, setScreen] = useState({ title: '', content: '' });
+    const [screen, setScreen] = useState({ title: '', content: '' , color:'white' });
 
-    const handleScreen = (title, content) => {
+    const handleScreen = (title, content,color) => {
         setScreen(
             {
                 ...screen,
                 title,
-                content
+                content,
+                color
             }
         )
     }
