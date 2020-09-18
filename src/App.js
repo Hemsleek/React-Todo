@@ -23,7 +23,7 @@ defaultTodos[generateId()] = {
     content: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione id explicabo distinctio quaerat non? Necessitatibus enim vel, ducimus perspiciatis debitis provident alias, aperiam aliquam placeat cumque tempora maxime dignissimos ipsa.",
 
     created: Date.now(),
-    color:"white"
+    color:{bg:"white" , text_color:'black'}
 
 }
 const Todos = ({ list, screenhandler }) => {
@@ -107,15 +107,16 @@ const TodoWrapper = ({ todo, screenHandle }) => {
 
 // MAin-content
 const AddTodo = ({ set, todos }) => {
-    const[color , setColor] = useState('white')
+    const[color , setColor] = useState({ bg:"white" , text_color:'black'    
+        })
 
     const handleColor = (ev) => {
-
+        console.log(ev.target.getAttribute("name")[''])
         Array.from(ev.target.parentNode.childNodes).map(element => element.classList.remove('active'))
 
         ev.target.classList.add('active')
         
-        setColor(ev.target.getAttribute("name"))
+        setColor(ev.target.getAttribute("name")['text_color'])
     }
     const handleSubmit = (ev) => {
 
@@ -155,7 +156,7 @@ const AddTodo = ({ set, todos }) => {
             <div className="DesignSubmit">
 
                 <div className="Colors">
-                    <span className="active" style={{background:"white"}}name="white" onClick={handleColor} >
+                    <span className="active" style={{background:"white"}} name={{bg:"white" , text_color:'black'}} onClick={handleColor} >
                         
                     </span>
                    
@@ -184,7 +185,7 @@ const MainContent = ({ set, todos, screen }) => {
     return (
         <div className="MainContent">
             <AddTodo set={set} todos={todos} />
-            <div className="Screen" style={{background : screen.color}}>
+            <div className="Screen" style={{background : screen.color.bg, color:screen.color.text_color}}>
 
                 <h3 className="Title">
                     {screen.title}
