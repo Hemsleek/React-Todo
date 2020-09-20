@@ -107,16 +107,18 @@ const TodoWrapper = ({ todo, screenHandle }) => {
 
 // MAin-content
 const AddTodo = ({ set, todos }) => {
-    const[color , setColor] = useState({ bg:"white" , text_color:'black'    
+    const[color , setColor] = useState({ "bg":"white" , "text_color":'black'    
         })
 
     const handleColor = (ev) => {
-        console.log(ev.target.getAttribute("name")[''])
+        var answer = ev.target.getAttribute("name");
+
+        console.log(eval(answer))
         Array.from(ev.target.parentNode.childNodes).map(element => element.classList.remove('active'))
 
         ev.target.classList.add('active')
         
-        setColor(ev.target.getAttribute("name")['text_color'])
+        setColor(ev.target.getAttribute("name"))
     }
     const handleSubmit = (ev) => {
 
@@ -156,17 +158,17 @@ const AddTodo = ({ set, todos }) => {
             <div className="DesignSubmit">
 
                 <div className="Colors">
-                    <span className="active" style={{background:"white"}} name={{bg:"white" , text_color:'black'}} onClick={handleColor} >
+                    <span className="active" style={{background:"white"}} name={{"bg":"white" , "text_color":'black'} } onClick={handleColor} >
                         
                     </span>
                    
-                    <span  style={{background:"#42EADDFF"}} name="#42EADDFF" onClick={handleColor} >
+                    <span  style={{background:"#42EADDFF"}} name={{"bg":"white" , "text_color":'black'} } name="#42EADDFF" onClick={handleColor} >
                     </span>
 
-                    <span  style={{background:"#ED2B33FF"}} name="#ED2B33FF" onClick={handleColor} >
+                    <span  style={{background:"#ED2B33FF"}} name={{"bg":"white" , "text_color":'black'} }  name="#ED2B33FF" onClick={handleColor} >
                     </span>
 
-                    <span style={{background:"#FEE715FF"}} name="#FEE715FF" onClick={handleColor} >
+                    <span style={{background:"#FEE715FF"}} name={{"bg":"white" , "text_color":'black'} } name="#FEE715FF" onClick={handleColor} >
                     </span>
                 </div>
                 <button type="submit" form="my-form">
