@@ -111,15 +111,14 @@ const AddTodo = ({ set, todos }) => {
         })
 
     const handleColor = (ev) => {
-        var answer = ev.target.getAttribute("name");
 
-        console.log(eval(answer))
         Array.from(ev.target.parentNode.childNodes).map(element => element.classList.remove('active'))
-
+       
         ev.target.classList.add('active')
         
-        setColor(ev.target.getAttribute("name"))
+        setColor(JSON.parse(ev.target.getAttribute("name")))
     }
+    
     const handleSubmit = (ev) => {
 
         ev.preventDefault()
@@ -158,17 +157,17 @@ const AddTodo = ({ set, todos }) => {
             <div className="DesignSubmit">
 
                 <div className="Colors">
-                    <span className="active" style={{background:"white"}} name={{"bg":"white" , "text_color":'black'} } onClick={handleColor} >
+                    <span className="active" style={{background:"white"}} name={{bg:"white" , text_color:'black',toString:function(){return JSON.stringify(this)}} } onClick={handleColor} >
                         
                     </span>
                    
-                    <span  style={{background:"#42EADDFF"}} name={{"bg":"white" , "text_color":'black'} } name="#42EADDFF" onClick={handleColor} >
+                    <span  style={{background:"#42EADDFF"}}  name={{bg:"#42EADDFF" , text_color:'#CDB599FF',toString:function(){return JSON.stringify(this)}}} onClick={handleColor} >
                     </span>
 
-                    <span  style={{background:"#ED2B33FF"}} name={{"bg":"white" , "text_color":'black'} }  name="#ED2B33FF" onClick={handleColor} >
+                    <span  style={{background:"#ED2B33FF"}} name={{bg:"#ED2B33FF" , text_color:'#D85A7FFF',toString:function(){return JSON.stringify(this)}}} onClick={handleColor} >
                     </span>
 
-                    <span style={{background:"#FEE715FF"}} name={{"bg":"white" , "text_color":'black'} } name="#FEE715FF" onClick={handleColor} >
+                    <span style={{background:"#FEE715FF"}} name={{bg:"#FEE715FF" , text_color:'#101820FF',toString:function(){return JSON.stringify(this)}}} onClick={handleColor} >
                     </span>
                 </div>
                 <button type="submit" form="my-form">
