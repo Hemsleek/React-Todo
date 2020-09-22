@@ -86,6 +86,14 @@ $shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
             p{
               margin: 0;
               margin-bottom: .25rem;
+
+              &:before{
+                margin-right: .8rem;
+                width: 100px;
+                height: 100px;
+                content: "";
+                background-color: red;
+              }
               
             }
             span{
@@ -155,12 +163,12 @@ $shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
                 display: flex;
                 position: relative;
                 
-                
+                &:first-child{
+
+                  border: 1px solid black;
+                }
               }
-              span:first-child{
-                border: 1px solid black;
-                
-              }
+              
               span.active:after{
                 display: flex;
                 
@@ -183,11 +191,7 @@ $shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
                 margin-left: .4rem;
 
               }
-              // span:first-child{
-              //   width: 17px;
-              //   height: 17px;
-              //   background: $white;
-              // }
+              
               
             }
             button{
@@ -202,10 +206,13 @@ $shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
               cursor: pointer;
               outline: none;
               
+              &:hover{
+
+                background: #ede0e0;
+              }
+              
             }
-            button:hover{
-              background: #ede0e0;
-            }
+           
             img{
               height: 18px;
               width: 18px;
