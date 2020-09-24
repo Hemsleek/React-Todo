@@ -146,13 +146,13 @@ const AddTodo = ({ set, todos }) => {
 
     const colorArray = [
 
-        {bg:"white" , text_color:'black',toString:function(){return JSON.stringify(this)}},
+        {bg:"white" , text_color:'black'},
 
-        {bg:"#42EADDFF" , text_color:'#CDB599FF',toString:function(){return JSON.stringify(this)}},
+        {bg:"#42EADDFF" , text_color:'#CDB599FF'},
 
-        {bg:"#ED2B33FF" , text_color:'#D85A7FFF',toString:function(){return JSON.stringify(this)}},
+        {bg:"#ED2B33FF" , text_color:'#D85A7FFF'},
 
-        {bg:"#FEE715FF" , text_color:'#101820FF',toString:function(){return JSON.stringify(this)}},
+        {bg:"#FEE715FF" , text_color:'#101820FF'}
 
     ]
 
@@ -168,16 +168,12 @@ const AddTodo = ({ set, todos }) => {
             <div className="DesignSubmit">
 
                 <div className="Colors">
-                   { colorArray.map(color => <span className="active" style={{background:"white"}}  onClick={handleColor} )
-        }   
-                    {/* <span className="active" style={{background:"white"}} name={ } onClick={handleColor} />
-                        
+                   { 
                    
-                    <span  style={{background:"#42EADDFF"}}  name={{bg:"#42EADDFF" , text_color:'#CDB599FF',toString:function(){return JSON.stringify(this)}}} onClick={handleColor} />
+                   colorArray.map((color,index) => (<span key={`color-${index}`} className={!index ? "active" : ""} style={{background:color.bg}}  name={{...color,toString:function(){return JSON.stringify(this)}}} onClick={handleColor} />))
 
-                    <span  style={{background:"#ED2B33FF"}} name={{bg:"#ED2B33FF" , text_color:'#D85A7FFF',toString:function(){return JSON.stringify(this)}}} onClick={handleColor} />
-
-                    <span style={{background:"#FEE715FF"}} name={{bg:"#FEE715FF" , text_color:'#101820FF',toString:function(){return JSON.stringify(this)}}} onClick={handleColor} /> */}
+                    }   
+                 
                     
                 </div>
                 <button type="submit" form="my-form">
